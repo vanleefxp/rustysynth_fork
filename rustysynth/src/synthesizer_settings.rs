@@ -1,13 +1,11 @@
-#![allow(dead_code)]
-
 use crate::error::SynthesizerError;
 
 /// Specifies a set of parameters for synthesis.
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 #[non_exhaustive]
 pub struct SynthesizerSettings {
     /// The sample rate for synthesis.
-    pub sample_rate: i32,
+    pub sample_rate: u32,
     /// The block size for rendering waveform.
     pub block_size: usize,
     /// The number of maximum polyphony.
@@ -26,7 +24,7 @@ impl SynthesizerSettings {
     /// # Arguments
     ///
     /// * `sample_rate` - The sample rate for synthesis.
-    pub fn new(sample_rate: i32) -> Self {
+    pub fn new(sample_rate: u32) -> Self {
         Self {
             sample_rate,
             block_size: SynthesizerSettings::DEFAULT_BLOCK_SIZE,
@@ -43,7 +41,7 @@ impl SynthesizerSettings {
         Ok(())
     }
 
-    fn check_sample_rate(value: i32) -> Result<(), SynthesizerError> {
+    fn check_sample_rate(value: u32) -> Result<(), SynthesizerError> {
         if !(16_000..=192_000).contains(&value) {
             return Err(SynthesizerError::SampleRateOutOfRange(value));
         }

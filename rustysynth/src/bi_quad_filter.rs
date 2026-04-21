@@ -1,13 +1,11 @@
-#![allow(dead_code)]
-
 use std::f32::consts;
 
 use crate::synthesizer_settings::SynthesizerSettings;
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 #[non_exhaustive]
 pub(crate) struct BiQuadFilter {
-    sample_rate: i32,
+    sample_rate: u32,
 
     active: bool,
 

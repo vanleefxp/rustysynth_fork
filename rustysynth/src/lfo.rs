@@ -2,10 +2,10 @@
 
 use crate::synthesizer_settings::SynthesizerSettings;
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 #[non_exhaustive]
 pub(crate) struct Lfo {
-    sample_rate: i32,
+    sample_rate: u32,
     block_size: usize,
 
     active: bool,

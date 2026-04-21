@@ -4,7 +4,7 @@ use std::io::Read;
 
 use crate::{binary_reader::BinaryReader, error::SoundFontError};
 
-#[derive(Clone, Copy)]
+#[derive(Debug, Clone, Copy)]
 #[non_exhaustive]
 pub(crate) struct Generator {
     pub(crate) generator_type: u16,

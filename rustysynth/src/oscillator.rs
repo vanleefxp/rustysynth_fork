@@ -8,13 +8,13 @@ use crate::synthesizer_settings::SynthesizerSettings;
 // and the rest represent the integer part.
 // For clarity, fixed-point number variables have a suffix "_fp".
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 #[non_exhaustive]
 pub(crate) struct Oscillator {
-    synthesizer_sample_rate: i32,
+    synthesizer_sample_rate: u32,
 
     loop_mode: LoopMode,
-    sample_sample_rate: i32,
+    sample_sample_rate: u32,
     start: i32,
     end: i32,
     start_loop: i32,
@@ -57,7 +57,7 @@ impl Oscillator {
     pub(crate) fn start(
         &mut self,
         loop_mode: LoopMode,
-        sample_rate: i32,
+        sample_rate: u32,
         start: i32,
         end: i32,
         start_loop: i32,

@@ -6,6 +6,7 @@ use crate::loop_mode::LoopMode;
 use crate::preset_region::PresetRegion;
 use crate::soundfont_math::SoundFontMath;
 
+#[derive(Debug, Clone)]
 #[non_exhaustive]
 pub(crate) struct RegionPair<'a> {
     pub(crate) preset: &'a PresetRegion,

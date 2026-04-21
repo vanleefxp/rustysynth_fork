@@ -6,7 +6,7 @@ use crate::binary_reader::BinaryReader;
 use crate::error::SoundFontError;
 
 /// Represents a sample in the SoundFont.
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 #[non_exhaustive]
 pub struct SampleHeader {
     pub(crate) name: String,
@@ -14,7 +14,7 @@ pub struct SampleHeader {
     pub(crate) end: i32,
     pub(crate) start_loop: i32,
     pub(crate) end_loop: i32,
-    pub(crate) sample_rate: i32,
+    pub(crate) sample_rate: u32,
     pub(crate) original_pitch: u8,
     pub(crate) pitch_correction: i8,
     pub(crate) link: u16,
@@ -28,7 +28,7 @@ impl SampleHeader {
         let end = BinaryReader::read_i32(reader)?;
         let start_loop = BinaryReader::read_i32(reader)?;
         let end_loop = BinaryReader::read_i32(reader)?;
-        let sample_rate = BinaryReader::read_i32(reader)?;
+        let sample_rate = BinaryReader::read_u32(reader)?;
         let original_pitch = BinaryReader::read_u8(reader)?;
         let pitch_correction = BinaryReader::read_i8(reader)?;
         let link = BinaryReader::read_u16(reader)?;
@@ -95,7 +95,7 @@ impl SampleHeader {
     }
 
     /// Gets the sample rate of the sample.
-    pub fn get_sample_rate(&self) -> i32 {
+    pub fn get_sample_rate(&self) -> u32 {
         self.sample_rate
     }
 

@@ -2,7 +2,7 @@
 
 use std::cmp;
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 #[non_exhaustive]
 pub(crate) struct Reverb {
     cfs_l: Vec<CombFilter>,
@@ -58,7 +58,7 @@ impl Reverb {
     const APF_TUNING_L4: usize = 225;
     const APF_TUNING_R4: usize = 225 + Reverb::STEREO_SPREAD;
 
-    pub(crate) fn new(sample_rate: i32) -> Self {
+    pub(crate) fn new(sample_rate: u32) -> Self {
         let cfs_l: Vec<CombFilter> = vec![
             CombFilter::new(Reverb::scale_tuning(sample_rate, Reverb::CF_TUNING_L1)),
             CombFilter::new(Reverb::scale_tuning(sample_rate, Reverb::CF_TUNING_L2)),
@@ -145,7 +145,7 @@ impl Reverb {
         }
     }
 
-    fn scale_tuning(sample_rate: i32, tuning: usize) -> usize {
+    fn scale_tuning(sample_rate: u32, tuning: usize) -> usize {
         ((sample_rate as f64) / 44100_f64 * (tuning as f64)).round() as usize
     }
 
@@ -237,7 +237,7 @@ impl Reverb {
     }
 }
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 #[non_exhaustive]
 struct CombFilter {
     buffer: Vec<f32>,
@@ -325,7 +325,7 @@ impl CombFilter {
     }
 }
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 #[non_exhaustive]
 struct AllPassFilter {
     buffer: Vec<f32>,

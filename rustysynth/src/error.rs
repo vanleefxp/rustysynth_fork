@@ -8,7 +8,7 @@ use crate::four_cc::FourCC;
 #[derive(Debug)]
 #[non_exhaustive]
 pub enum SynthesizerError {
-    SampleRateOutOfRange(i32),
+    SampleRateOutOfRange(u32),
     BlockSizeOutOfRange(usize),
     MaximumPolyphonyOutOfRange(usize),
 }

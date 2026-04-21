@@ -1,5 +1,3 @@
-#![allow(dead_code)]
-
 use std::cmp;
 use std::collections::HashMap;
 use std::sync::Arc;
@@ -16,11 +14,11 @@ use crate::synthesizer_settings::SynthesizerSettings;
 use crate::voice_collection::VoiceCollection;
 
 /// An instance of the SoundFont synthesizer.
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 #[non_exhaustive]
 pub struct Synthesizer {
     pub(crate) sound_font: Arc<SoundFont>,
-    pub(crate) sample_rate: i32,
+    pub(crate) sample_rate: u32,
     pub(crate) block_size: usize,
     pub(crate) maximum_polyphony: usize,
 
@@ -492,7 +490,7 @@ impl Synthesizer {
     }
 
     /// Gets the sample rate for synthesis.
-    pub fn get_sample_rate(&self) -> i32 {
+    pub fn get_sample_rate(&self) -> u32 {
         self.sample_rate
     }
 
@@ -526,7 +524,7 @@ impl Synthesizer {
     }
 }
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 struct Effects {
     reverb: Reverb,
     reverb_input: Vec<f32>,
